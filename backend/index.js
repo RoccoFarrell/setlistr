@@ -5,7 +5,10 @@ const dotenv = require('dotenv').config()
 const app = new Koa(); 
 const bandsRouter = new Router();
 
+const cors = require('koa2-cors')
+
 app.use(logger())
+app.use(cors())
 
 require('./routes/bands')({ bandsRouter });
 
