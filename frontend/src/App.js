@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Page from './components/Page'
+import SetlistrProvider from './components/SetlistrProvider'
 
 import logo from './assets/logo.png'
 
@@ -9,29 +9,41 @@ import { Pane, Text, Heading, majorScale, defaultTheme, ThemeProvider } from 'ev
 import Data from './components/Data'
 
 const newTheme = {
-  ...defaultTheme,
-  fontFamily: 'Oxanium'
+  fontFamily: 'Oxanium',
+  ...defaultTheme
+  
 }
 
 function App() {
   return (
     <div className="App">
       <ThemeProvider value={newTheme}>
-        <Page>
+        <SetlistrProvider>
           <Pane
             display="flex"
-            flexDirection="column"
             alignItems="center"
-            justifyContent="center"
+            justifyContent="space-between"
             width='100%'
-            height='100vh'
+            height='100px'
             margin={majorScale(1)}
+            paddingX={majorScale(4)}
           >
-            <img src={logo} className="App-logo" alt="logo" />
-            <Heading size={900} marginTop="default">Setlistr.io</Heading>
+            <img 
+                    alt='company logo' 
+                    height='100px'  
+                    src={logo}
+                />
+            <Heading 
+              size={700}
+            >
+              Setlistr.io
+            </Heading>
           </Pane>
-          <Data/>
-        </Page>
+          <Pane>
+            <Data> 
+            </Data>
+          </Pane>
+        </SetlistrProvider>
       </ThemeProvider>
     </div>
   );

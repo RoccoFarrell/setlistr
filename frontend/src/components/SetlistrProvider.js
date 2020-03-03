@@ -1,35 +1,40 @@
 import React, { useEffect, useState} from 'react' 
 import axios from 'axios';
-import SetlistrContext, { SetlistrProvider } from './SetlistrContext'
-
+import SetlistrContext from './SetlistrContext'
 
 //Custom hook
 function useSetlists() {
-  const [setlists, setSetlists] = useState({});
+  const [setlists, setSetlists] = useState({
+    type: "",
+    itemsPerPage: 0,
+    page: 0,
+    total: 0,
+    setlist: []
+  });
 
   useEffect(() => {
     console.log('Mounting or updating')
     async function fetchData() {
       axios.get(`http://localhost:4000/bands/umphreys.json`)
       .then(res => {
-        const content = res.data;
+        let content = res.data;
         console.log(content)
-        return content
+        setSetlists(content)
       })
     }
-    let setlistData = fetchData()
-    setSetlists(setlistData)
+    fetchData()
   }, [])
   return setlists
+  
 }
 
 export default function Page({children}){
-  const setlists = useSetlists();
+  const setlistObj = useSetlists();
 
   return (
     <SetlistrContext.Provider
       value={{
-        setlists
+        setlistObj
       }}
     >
         <div className="page">{children}</div>
