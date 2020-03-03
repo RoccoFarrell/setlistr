@@ -16,4 +16,7 @@ require('./routes/bands')({ bandsRouter });
 app.use(bandsRouter.routes());
 app.use(bandsRouter.allowedMethods());
 
-app.listen(4000);
+let port = 4000
+
+app.listen(port);
+console.log('App live on ' + port)

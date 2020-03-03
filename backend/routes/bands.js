@@ -2,7 +2,7 @@ const axios = require("axios")
 
 module.exports = ({ bandsRouter }) => {
   // getting the home route
-  bandsRouter.get('/bands/umphreys', async (ctx, next) => {
+  bandsRouter.get('/bands/umphreys.json', async (ctx, next) => {
     console.log('umphreys route hit')
     await axios.get('https://api.setlist.fm/rest/1.0/search/setlists?artistMbid=3826a6e0-9ea5-4007-941c-25b9dd943981&p=1', {
       headers: {
@@ -15,7 +15,7 @@ module.exports = ({ bandsRouter }) => {
       }
     })
       .then(res => {
-        // console.log(res.data)
+        // console.log(res.data, typeof(res.data))
         ctx.body = res.data;
       })
       .catch(err => {

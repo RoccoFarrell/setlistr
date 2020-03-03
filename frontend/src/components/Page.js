@@ -1,5 +1,7 @@
 import React, { useEffect, useState} from 'react' 
+import axios from 'axios';
 import SetlistrContext, { SetlistrProvider } from './SetlistrContext'
+
 
 //Custom hook
 function useSetlists() {
@@ -8,13 +10,12 @@ function useSetlists() {
   useEffect(() => {
     console.log('Mounting or updating')
     async function fetchData() {
-      const data = await fetch('http://localhost:4000/bands/umphreys', {
-        mode: 'cors'
+      axios.get(`http://localhost:4000/bands/umphreys.json`)
+      .then(res => {
+        const content = res.data;
+        console.log(content)
+        return content
       })
-      console.log(data, data.body)
-      let content = data.body.getReader().read()
-      console.log(content)
-      return content
     }
     let setlistData = fetchData()
     setSetlists(setlistData)
